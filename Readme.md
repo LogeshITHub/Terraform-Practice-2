@@ -6,14 +6,20 @@ This repository serves as a hands-on practice ground for learning and experiment
 
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
+- [Project Structure](#project-structure)
 - [Terraform Workflow](#terraform-workflow)
 - [Key Terraform Concepts](#key-terraform-concepts)
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before you begin, ensure you have the following set up:
 
-- **AWS Account**: An active AWS account with credentials configured for Terraform to use (e.g., via environment variables or IAM roles).
+- **AWS Account**: An active AWS account. Your credentials must be configured for Terraform to use. The most common method is to set the following environment variables:
+  ```bash
+  export AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY"
+  export AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRET_KEY"
+  export AWS_REGION="us-east-1" # Or your preferred region
+  ```
 - **Terraform CLI**: Installed on your local machine.
   ```bash
   terraform version
@@ -33,6 +39,17 @@ Before you begin, ensure you have the following installed:
     terraform init
     ```
     This command downloads the necessary providers and modules.
+
+## Project Structure
+
+This project follows a standard Terraform file structure:
+
+- `main.tf`: The primary entrypoint file that defines the resources to be created (e.g., AWS instances, security groups).
+- `variables.tf`: Contains declarations for all the input variables used in the configuration. This allows for easy customization.
+- `outputs.tf`: Defines the output values that you want to easily query after your infrastructure is deployed (e.g., an instance's public IP address).
+- `terraform.tfvars`: This file is used to provide values to the variables defined in `variables.tf`. **This file is not meant to be committed to version control** as it may contain sensitive or environment-specific data. A `terraform.tfvars.example` is often provided as a template.
+
+---
 
 ## Terraform Workflow
 
