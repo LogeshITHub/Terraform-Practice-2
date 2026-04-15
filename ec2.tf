@@ -12,3 +12,4 @@ resource "aws_instance" "web-server-1" {
     Managed_by = var.managed_by
   }
 }
+
