@@ -14,24 +14,22 @@ ignore
 folder name ".terraform"
 
 # 1. remove old git history
-rm -rf .git
+# 1. Fresh start (Pazhaya history-ah clear panna)
+Remove-Item -Recurse -Force .git
 
-# 2. re-init repo
+# 2. Setup .gitignore (Large files skip panna)
+Set-Content .gitignore ".terraform/`n*.tfstate*`n.terraform.lock.hcl"
+
+# 3. Initialize Git
 git init
 git remote add origin https://github.com/LogeshITHub/Terraform-Practice-2.git
-
-# 3. create .gitignore (VERY IMPORTANT BEFORE add)
-echo ".terraform/" >> .gitignore
-echo "*.tfstate*" >> .gitignore
-
-# 4. add files (safe)
-git add .
-
-# 5. commit
-git commit -m "clean terraform repo"
-
-# 6. set branch
 git branch -M main
 
-# 7. push (NO force needed)
-git push -u origin main
+# 4. Add and Verify (Kandippa check pannunga)
+git add .
+git ls-files | findstr "terraform-provider-aws" 
+# Mela ulla command output empty-ah irukanum!
+
+# 5. Commit and Push
+git commit -m "Clean Terraform push - only config files"
+git push -u origin main --force
