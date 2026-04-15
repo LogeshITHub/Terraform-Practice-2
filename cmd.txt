@@ -1,0 +1,77 @@
+------------------------------------------------------------------------------------------------------------------------
+
+# Git Repository Reset & Push (Pudhu history create panna)
+
+# 1. Reset everything (Pazhaya history-a clear panna)
+Remove-Item -Recurse -Force .git
+
+# 2. Initialize Git Fresh
+git init
+
+# 3. Create .gitignore (CRITICAL: Files add panradhuku munnadi idhu irukanum)
+# Note: Repo-la irukura .gitignore use panradhu better.
+Set-Content .gitignore ".terraform/`n*.tfstate*`n.terraform.lock.hcl`n*.tfvars"
+
+# 4. Configure User (Global-a illati ippo pannunga)
+git config --global user.name "LogeshITHub"
+git config --global user.email "logesh24it@gmail.com"
+
+# 5. Connect to GitHub
+git remote add origin https://github.com/LogeshITHub/Terraform-Practice-2.git
+git branch -M main
+
+# 6. Add files (Safe stage)
+git add .
+
+# 7. Final Verification (Sensitive files check pannu - NO output varanum)
+git ls-files | findstr ".tfstate"
+git ls-files | findstr ".tfvars"
+
+# 8. Commit and Production Push
+git commit -m "Production ready: Terraform source files only"
+git push -u origin main --force
+
+------------------------------------------------------------------------------------------------------------------------
+
+# Terraform Workflow Commands (Infrastructure manage seiyya)
+
+# 1. Initialize (Project-a thodanga, thevaiyana providers-a download seiyya)
+terraform init
+
+# 2. Format Code (Code-a azhaga align seiyya)
+terraform fmt
+
+# 3. Validate Syntax (Apply panradhuku munnadi error irukka-nu check pannum)
+terraform validate
+
+# 4. Plan (Enna maaruthalgal nadakkum endru paarka)
+terraform plan
+
+# 5. Apply (Altymaippai uruvaakka / Infrastructure create panna)
+terraform apply
+# (Confirmation kekkum, 'yes' type pannanum. Avoid panna `-auto-approve` use pannalam)
+# terraform apply -auto-approve
+
+# 6. View Outputs (Veliyidugalai paarka)
+terraform output
+
+# 7. Destroy (Altymaippai azhikka / Infrastructure-a destroy panna)
+terraform destroy
+# (Confirmation kekkum, 'yes' type pannanum. Avoid panna `-auto-approve` use pannalam)
+# terraform destroy -auto-approve
+
+------------------------------------------------------------------------------------------------------------------------
+
+# Other Useful Terraform Commands (Matra payanulla commands)
+
+# 1. Show State (Tharpothaiya nilaiyai kaatta)
+terraform show
+
+# 2. List Resources in State (State-il ulla resources-a pattiylida)
+terraform state list
+
+# 3. Show Specific Resource (Oru kurippitta resource-in vivarangalai kaatta)
+# terraform state show <resource_address>
+# Example: terraform state show aws_security_group.allow_tls
+
+------------------------------------------------------------------------------------------------------------------------
